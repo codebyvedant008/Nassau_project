@@ -58,6 +58,54 @@ st.markdown("""
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2) !important;
         }
 
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #374151; }
+
+        /* Boxed Navigation Styling */
+        [data-testid="stSidebar"] [role="radiogroup"] {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        [data-testid="stSidebar"] [role="radiogroup"] label {
+            background: transparent;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            transition: all 0.3s ease;
+            padding: 8px 12px !important;
+            border: 1px solid transparent;
+        }
+
+        [data-testid="stSidebar"] [role="radiogroup"] label:hover {
+            background: rgba(99, 102, 241, 0.1) !important;
+            border: 1px solid rgba(99, 102, 241, 0.2) !important;
+            transform: translateX(5px);
+        }
+
+        [data-testid="stSidebar"] [role="radiogroup"] label[data-baseweb="radio"] div:first-child {
+            display: none; /* Hide the default radio circle */
+        }
+
+        [data-testid="stSidebar"] [role="radiogroup"] label div[data-testid="stMarkdownContainer"] p {
+            color: #94A3B8 !important;
+            font-weight: 500;
+        }
+
+        [data-testid="stSidebar"] [role="radiogroup"] [aria-checked="true"] {
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.2) 0%, transparent 100%) !important;
+            border: 1px solid rgba(99, 102, 241, 0.4) !important;
+        }
+
+        [data-testid="stSidebar"] [role="radiogroup"] [aria-checked="true"] p {
+            color: #F8FAFC !important;
+            font-weight: 700 !important;
+        }
+
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
     </style>
