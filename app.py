@@ -100,6 +100,11 @@ with st.sidebar:
     # Product Search
     product_search = st.text_input("🔍 SKU Search", placeholder="e.g. Gummi Bears")
     
+    # Margin Threshold Filter
+    st.markdown("---")
+    st.markdown("### 🛡️ Risk Controls")
+    margin_threshold = st.slider("Margin Threshold (%)", -50, 100, 0, help="Hide products falling below this margin")
+    
     # Scenario Simulator
     st.markdown("---")
     st.markdown("### 🎲 Scenario Simulator")
@@ -114,6 +119,9 @@ if selected_division != "All":
     filtered_df = filtered_df[filtered_df['Division'] == selected_division]
 if product_search:
     filtered_df = filtered_df[filtered_df['Product Name'].str.contains(product_search, case=False, na=False)]
+
+# --- APPLY COMPLIANCE FILTERS ---
+filtered_df = filtered_df[filtered_df['Gross Margin %'] >= margin_threshold]
 
 # Apply Scenario
 filtered_df['Sales'] *= (1 + price_change/100)
@@ -143,17 +151,24 @@ with st.sidebar:
 # --- MAIN CONTENT ---
 st.markdown(f'<h1 class="main-title">{pages[selected_page]} {selected_page}</h1>', unsafe_allow_html=True)
 
-# --- DYNAMIC NARRATIVE ---
+# --- DYNAMIC NARRATIVE (Government & Stakeholder Brief) ---
 def generate_summary(data):
     total_rev = data['Sales'].sum()
     total_profit = data['Gross Profit'].sum()
     avg_margin = (total_profit / total_rev * 100) if total_rev > 0 else 0
     top_div = data.groupby('Division')['Sales'].sum().idxmax() if not data.empty else "N/A"
+    
+    # Volatility Calculation
+    volatility = data.groupby('Product Name')['Gross Margin %'].std().mean()
+    
     summary = f"""
     <div style="background: rgba(99, 102, 241, 0.1); border-left: 5px solid #6366F1; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
-        <p style="margin:0; font-size: 1.1rem; color: #E2E8F0;">
-            <b>Intelligence Brief:</b> Net revenue is <b>${total_rev:,.0f}</b>. 
-            The <b>{top_div}</b> division is the primary engine, with a portfolio efficiency of <b>{avg_margin:.1f}%</b>.
+        <h4 style="margin:0 0 10px 0; color: #6366F1;">🏛️ Executive Intelligence Report</h4>
+        <p style="margin:0; font-size: 1.0rem; color: #E2E8F0;">
+            Fiscal oversight analysis confirms a net revenue of <b>${total_rev:,.0f}</b>. 
+            The <b>{top_div}</b> sector demonstrates robust structural efficiency. 
+            <b>Portfolio Stability:</b> Average margin volatility is <b>{volatility:.2f}%</b>, indicating 
+            {'moderate' if volatility < 10 else 'high'} market sensitivity across current operations.
         </p>
     </div>
     """
@@ -166,7 +181,7 @@ if selected_page == "Executive Overview":
     with c1: st.markdown(utils.create_kpi_card("Total Revenue", filtered_df['Sales'].sum(), prefix="$"), unsafe_allow_html=True)
     with c2: st.markdown(utils.create_kpi_card("Total Profit", filtered_df['Gross Profit'].sum(), prefix="$"), unsafe_allow_html=True)
     with c3: st.markdown(utils.create_kpi_card("Avg. Margin", filtered_df['Gross Margin %'].mean(), suffix="%"), unsafe_allow_html=True)
-    with c4: st.markdown(utils.create_kpi_card("Order Count", len(filtered_df)), unsafe_allow_html=True)
+    with c4: st.markdown(utils.create_kpi_card("Profit per Unit", filtered_df['Profit per Unit'].mean(), prefix="$"), unsafe_allow_html=True)
     
     col_l, col_r = st.columns([2, 1])
     with col_l:
