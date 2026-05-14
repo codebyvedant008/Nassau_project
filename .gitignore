@@ -1,0 +1,7 @@
+venv/
+.gemini/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.streamlit/
+data/cleaned_data.csv
