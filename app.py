@@ -64,35 +64,11 @@ st.markdown("""
         ::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #374151; }
 
-        /* Boxed Navigation Styling */
-        [data-testid="stSidebar"] [role="radiogroup"] {
-            background: rgba(255, 255, 255, 0.05) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            border-radius: 12px !important;
-            padding: 10px !important;
-        }
-
-        [data-testid="stSidebar"] [role="radiogroup"] label {
-            background: transparent !important;
-            border-radius: 8px !important;
-            transition: all 0.3s ease !important;
-            padding: 10px !important;
-            color: #F8FAFC !important;
-        }
-
-        [data-testid="stSidebar"] [role="radiogroup"] label:hover {
-            background: rgba(99, 102, 241, 0.2) !important;
-            transform: translateX(5px);
-        }
-
-        [data-testid="stSidebar"] [role="radiogroup"] label div:first-child {
-            display: none !important; /* Hide default radio circle */
-        }
-
-        [data-testid="stSidebar"] [role="radiogroup"] [aria-checked="true"] {
-            background: rgba(99, 102, 241, 0.3) !important;
-            border: 1px solid rgba(99, 102, 241, 0.5) !important;
-        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #374151; }
 
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
