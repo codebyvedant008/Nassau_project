@@ -66,13 +66,22 @@ st.markdown("""
 # --- LOAD DATA ---
 @st.cache_data
 def load_and_prep_data():
-    df = utils.load_data()
-    return df if df is not None else pd.DataFrame()
+    import os
+    path = "data/cleaned_data.csv"
+    if not os.path.exists(path):
+        st.error(f"❌ Critical Error: Data file not found at {os.path.abspath(path)}")
+        return None
+    try:
+        df = utils.load_data(path)
+        return df
+    except Exception as e:
+        st.error(f"❌ Error reading data: {str(e)}")
+        return None
 
 df = load_and_prep_data()
 
-if df.empty:
-    st.error("Data connection failed.")
+if df is None or df.empty:
+    st.info("💡 Pro-tip: If you just pushed the data, please click 'Clear Cache' in the Streamlit menu (top right) or refresh the page.")
     st.stop()
 
 # --- SIDEBAR FILTERS ---
