@@ -70,46 +70,33 @@ st.markdown("""
         ::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #374151; }
 
-        /* Individual Boxed Navigation Styling */
-        [data-testid="stSidebar"] [role="radiogroup"] {
-            gap: 12px !important;
-        }
-
-        [data-testid="stSidebar"] [role="radiogroup"] label {
-            background: rgba(255, 255, 255, 0.05) !important;
+        /* Premium Sidebar Button Styling */
+        div[data-testid="stSidebar"] button {
+            background-color: rgba(255, 255, 255, 0.05) !important;
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: #94A3B8 !important;
             border-radius: 10px !important;
-            padding: 8px 12px !important;
+            width: 100% !important;
+            padding: 10px !important;
+            margin-bottom: 8px !important;
             transition: all 0.3s ease !important;
+            text-align: left !important;
+            justify-content: flex-start !important;
         }
 
-        /* Ensure text is bright and visible */
-        [data-testid="stSidebar"] [role="radiogroup"] label div[data-testid="stMarkdownContainer"] p {
+        div[data-testid="stSidebar"] button:hover {
+            background-color: rgba(99, 102, 241, 0.15) !important;
+            border-color: #6366F1 !important;
             color: #F8FAFC !important;
-            font-size: 1rem !important;
-            margin: 0 !important;
-            font-weight: 500 !important;
+            transform: translateX(5px) !important;
         }
 
-        [data-testid="stSidebar"] [role="radiogroup"] label:hover {
-            background: rgba(99, 102, 241, 0.2) !important;
-            transform: translateX(5px);
-        }
-
-        /* Hide radio circle */
-        [data-testid="stSidebar"] [role="radiogroup"] label div:first-child {
-            display: none !important;
-        }
-
-        /* Active State */
-        [data-testid="stSidebar"] [role="radiogroup"] [aria-checked="true"] {
-            background: rgba(99, 102, 241, 0.25) !important;
-            border: 1px solid #6366F1 !important;
-        }
-
-        [data-testid="stSidebar"] [role="radiogroup"] [aria-checked="true"] p {
+        /* Active Button State */
+        div[data-testid="stSidebar"] button[kind="primary"] {
+            background-color: rgba(99, 102, 241, 0.25) !important;
+            border-color: #6366F1 !important;
+            color: #F8FAFC !important;
             font-weight: 700 !important;
-            color: #FFFFFF !important;
         }
 
         #MainMenu {visibility: hidden;}
@@ -184,6 +171,9 @@ filtered_df['Gross Profit'] = filtered_df['Sales'] - filtered_df['Cost']
 filtered_df['Gross Margin %'] = (filtered_df['Gross Profit'] / filtered_df['Sales']) * 100
 
 # --- NAVIGATION ---
+if 'selected_page' not in st.session_state:
+    st.session_state.selected_page = "Executive Overview"
+
 pages = {
     "Executive Overview": "🏠",
     "Product Profitability": "💎",
@@ -196,11 +186,22 @@ pages = {
 
 with st.sidebar:
     st.markdown("---")
-    selected_page = st.radio("Navigation", list(pages.keys()), format_func=lambda x: f"{pages[x]} {x}")
+    st.markdown("### 🧭 Navigation")
+    for page, icon in pages.items():
+        if st.button(
+            f"{icon} {page}", 
+            key=f"btn_{page}", 
+            use_container_width=True,
+            type="primary" if st.session_state.selected_page == page else "secondary"
+        ):
+            st.session_state.selected_page = page
+            st.rerun()
     
     st.markdown("---")
     csv = filtered_df.to_csv(index=False).encode('utf-8')
     st.download_button("Export Intelligence (CSV)", csv, "nassau_export.csv", "text/csv", use_container_width=True)
+
+selected_page = st.session_state.selected_page
 
 # --- MAIN CONTENT ---
 st.markdown(f'<h1 class="main-title">{pages[selected_page]} {selected_page}</h1>', unsafe_allow_html=True)
