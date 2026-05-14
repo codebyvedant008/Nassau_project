@@ -70,6 +70,48 @@ st.markdown("""
         ::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #374151; }
 
+        /* Individual Boxed Navigation Styling */
+        [data-testid="stSidebar"] [role="radiogroup"] {
+            gap: 10px; /* Space between individual boxes */
+        }
+
+        [data-testid="stSidebar"] [role="radiogroup"] label {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 10px !important;
+            padding: 12px 15px !important;
+            margin-bottom: 0px !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            color: #F8FAFC !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        [data-testid="stSidebar"] [role="radiogroup"] label:hover {
+            background: rgba(99, 102, 241, 0.15) !important;
+            border: 1px solid rgba(99, 102, 241, 0.3) !important;
+            transform: translateX(8px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hide default radio circle */
+        [data-testid="stSidebar"] [role="radiogroup"] label div:first-child {
+            display: none !important;
+        }
+
+        /* Active/Selected Box Styling */
+        [data-testid="stSidebar"] [role="radiogroup"] [aria-checked="true"] {
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.25), rgba(99, 102, 241, 0.05)) !important;
+            border: 1px solid rgba(99, 102, 241, 0.6) !important;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
+        }
+
+        [data-testid="stSidebar"] [role="radiogroup"] [aria-checked="true"] p {
+            color: #F8FAFC !important;
+            font-weight: 700 !important;
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+        }
+
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
     </style>
