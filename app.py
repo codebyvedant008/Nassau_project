@@ -24,30 +24,10 @@ st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Base Styles & Animated Background */
+        /* Base Styles */
         .stApp {
-            background: #0F172A;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.1) 0px, transparent 50%),
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            background: radial-gradient(circle at top right, #1E293B, #0F172A);
             font-family: 'Inter', sans-serif;
-            animation: bgPulse 15s ease infinite alternate;
-        }
-
-        @keyframes bgPulse {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 10% 10%; }
-        }
-
-        /* Smooth Page Fade-In */
-        .main {
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         
         /* Headers */
@@ -59,12 +39,11 @@ st.markdown("""
         }
         
         .main-title {
-            font-size: 3.2rem !important;
-            background: linear-gradient(135deg, #FFFFFF 0%, #6366F1 100%);
+            font-size: 3rem !important;
+            background: linear-gradient(135deg, #F8FAFC 0%, #94A3B8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 2rem !important;
-            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.2));
         }
         
         /* Sidebar Styling */
