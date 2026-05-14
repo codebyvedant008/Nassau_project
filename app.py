@@ -72,44 +72,44 @@ st.markdown("""
 
         /* Individual Boxed Navigation Styling */
         [data-testid="stSidebar"] [role="radiogroup"] {
-            gap: 10px; /* Space between individual boxes */
+            gap: 12px !important;
         }
 
         [data-testid="stSidebar"] [role="radiogroup"] label {
             background: rgba(255, 255, 255, 0.05) !important;
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
             border-radius: 10px !important;
-            padding: 12px 15px !important;
-            margin-bottom: 0px !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            padding: 8px 12px !important;
+            transition: all 0.3s ease !important;
+        }
+
+        /* Ensure text is bright and visible */
+        [data-testid="stSidebar"] [role="radiogroup"] label div[data-testid="stMarkdownContainer"] p {
             color: #F8FAFC !important;
-            display: flex !important;
-            align-items: center !important;
+            font-size: 1rem !important;
+            margin: 0 !important;
+            font-weight: 500 !important;
         }
 
         [data-testid="stSidebar"] [role="radiogroup"] label:hover {
-            background: rgba(99, 102, 241, 0.15) !important;
-            border: 1px solid rgba(99, 102, 241, 0.3) !important;
-            transform: translateX(8px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            background: rgba(99, 102, 241, 0.2) !important;
+            transform: translateX(5px);
         }
 
-        /* Hide default radio circle */
+        /* Hide radio circle */
         [data-testid="stSidebar"] [role="radiogroup"] label div:first-child {
             display: none !important;
         }
 
-        /* Active/Selected Box Styling */
+        /* Active State */
         [data-testid="stSidebar"] [role="radiogroup"] [aria-checked="true"] {
-            background: linear-gradient(90deg, rgba(99, 102, 241, 0.25), rgba(99, 102, 241, 0.05)) !important;
-            border: 1px solid rgba(99, 102, 241, 0.6) !important;
-            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
+            background: rgba(99, 102, 241, 0.25) !important;
+            border: 1px solid #6366F1 !important;
         }
 
         [data-testid="stSidebar"] [role="radiogroup"] [aria-checked="true"] p {
-            color: #F8FAFC !important;
             font-weight: 700 !important;
-            text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+            color: #FFFFFF !important;
         }
 
         #MainMenu {visibility: hidden;}
